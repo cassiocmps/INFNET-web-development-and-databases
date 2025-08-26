@@ -14,11 +14,11 @@ internal class DiscountCalculator
 
 internal class Ex01
 {
-    public static void Executar()
+    public static void Run()
     {
         Console.WriteLine("--- Exercise 1: Custom Delegate for Discounts ---");
 
-        decimal originalPrice;
+        decimal originalPrice = default;
         while (originalPrice == default)
         {
             Console.Write("Price: ");

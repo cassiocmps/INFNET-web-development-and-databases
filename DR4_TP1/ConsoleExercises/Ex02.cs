@@ -22,7 +22,7 @@ internal class MultilingualWelcome
 
 internal class Ex02
 {
-    public static void Executar()
+    public static void Run()
     {
         var welcome = new MultilingualWelcome();
         Console.WriteLine("--- Exercise 2: Multilingual Actions with Action<string> ---");
@@ -31,7 +31,7 @@ internal class Ex02
         Console.WriteLine("2. English");
         Console.WriteLine("3. Spanish");
 
-        string choice;
+        string choice = default;
         while (string.IsNullOrEmpty(choice))
         {
             var input = Console.ReadLine();

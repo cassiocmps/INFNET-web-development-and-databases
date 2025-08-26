@@ -4,31 +4,31 @@ namespace ConsoleExercises;
 
 internal class RectangleAreaCalculator
 {
-    public double Calculate(double base, double height)
+    public double Calculate(double b, double h)
     {
         Func<double, double, double> calculateArea = (b, h) => b * h;
-        return calculateArea(base, height);
+        return calculateArea(b, h);
     }
 }
 
 internal class Ex03
 {
-    public static void Executar()
+    public static void Run()
     {
         Console.WriteLine("--- Exercise 3: Area Calculation Using Func ---");
 
-        double base;
-        while (base == default)
+        double b = default;
+        while (b == default)
         {
             Console.Write("Base of the rectangle: ");
-            double.TryParse(Console.ReadLine(), out base);
-            if (base == default)
+            double.TryParse(Console.ReadLine(), out b);
+            if (b == default)
             {
                 Console.WriteLine("Invalid input.");
             }
         }
 
-        double height;
+        double height = default;
         while (height == default)
         {
             Console.Write("Height of the rectangle: ");
@@ -40,7 +40,7 @@ internal class Ex03
         }
 
         var calculator = new RectangleAreaCalculator();
-        double area = calculator.Calculate(base, height);
+        double area = calculator.Calculate(b, height);
 
         Console.WriteLine($"Area: {area}");
     }

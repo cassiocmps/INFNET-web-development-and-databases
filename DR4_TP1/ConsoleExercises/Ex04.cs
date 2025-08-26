@@ -30,7 +30,7 @@ public class TemperatureSensor
 
 internal class Ex04
 {
-    public static void Executar()
+    public static void Run()
     {
         Console.WriteLine("--- Exercise 4: Temperature Monitoring with Custom Event ---");
         var sensor = new TemperatureSensor();
