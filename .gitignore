@@ -1,0 +1,36 @@
+
+# C#/.NET Core
+## OS generated files
+[Bb]in/
+[Oo]bj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+*.csproj.user
+*.vbproj.user
+
+# Rider
+.idea/
+
+# User-specific files
+*.log
+*.tlog
+*.bak
+*.vspscc
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+Build/
+build/
+Build/
+
+# Rider
+.idea/
