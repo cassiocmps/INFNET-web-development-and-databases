@@ -1,0 +1,29 @@
+@page
+@model ProductCatalog.Pages.Ex10.AddProductModel
+@{
+    ViewData["Title"] = "Add Product";
+}
+<h2>Add Product</h2>
+<form method="post">
+    <div>
+        <label>Name:</label>
+        <input asp-for="ProductName" />
+    </div>
+    <div>
+        <label>Price:</label>
+        <input asp-for="ProductPrice" type="number" step="0.01" />
+    </div>
+    <button type="submit">Submit</button>
+</form>
+@if (Model.ShowResult)
+{
+    <div>
+        <h3>Product Added:</h3>
+        <p>Name: @Model.ProductName</p>
+        <p>Price: $@Model.ProductPrice</p>
+    </div>
+}
+<nav>
+    <a href="/Ex08/Index">Product List</a> |
+    <a href="/Ex12/AddEvent">Add Event</a>
+</nav>

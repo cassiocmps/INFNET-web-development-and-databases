@@ -1,0 +1,16 @@
+@page
+@model ProductCatalog.Pages.Ex08.IndexModel
+@{
+    ViewData["Title"] = "Product List";
+}
+<h2>Product List</h2>
+<ul>
+@foreach (var product in Model.Products)
+{
+    <li>@product.Name - $@product.Price</li>
+}
+</ul>
+<nav>
+    <a href="/Ex10/AddProduct">Add Product</a> |
+    <a href="/Ex12/AddEvent">Add Event</a>
+</nav>

@@ -1,0 +1,34 @@
+@page
+@model ProductCatalog.Pages.Ex12.AddEventModel
+@{
+    ViewData["Title"] = "Add Event";
+}
+<h2>Add Event</h2>
+<form method="post">
+    <div>
+        <label>Title:</label>
+        <input asp-for="EventTitle" />
+    </div>
+    <div>
+        <label>Date:</label>
+        <input asp-for="EventDate" type="date" />
+    </div>
+    <div>
+        <label>Location:</label>
+        <input asp-for="EventLocation" />
+    </div>
+    <button type="submit">Submit</button>
+</form>
+@if (Model.ShowResult)
+{
+    <div>
+        <h3>Event Created:</h3>
+        <p>Title: @Model.EventTitle</p>
+        <p>Date: @Model.EventDate.ToShortDateString()</p>
+        <p>Location: @Model.EventLocation</p>
+    </div>
+}
+<nav>
+    <a href="/Ex08/Index">Product List</a> |
+    <a href="/Ex10/AddProduct">Add Product</a>
+</nav>
