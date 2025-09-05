@@ -1,0 +1,13 @@
+Welcome to the Razor Pages Exercises!
+
+This is a sample note file that demonstrates the file reading functionality.
+
+You can create your own notes using Exercise 10 and then view them here in Exercise 11.
+
+Key features demonstrated:
+- File writing with timestamps
+- File reading and content display
+- File listing with metadata
+- Download functionality
+
+Happy learning!
