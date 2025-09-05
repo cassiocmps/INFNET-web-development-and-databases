@@ -1,0 +1,24 @@
+@page
+@model Ex02_HandlerParametersModel
+@{
+    ViewData["Title"] = "Ex02: Model Binding and Handler Parameters";
+}
+
+<div class="exercise-container">
+    <h1>Ex02: Model Binding and Handler Parameters</h1>
+    
+    <form method="post">
+        <div class="mb-3">
+            <label for="cityName" class="form-label">City Name:</label>
+            <input name="cityName" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.SubmittedCityName))
+    {
+        <div class="mt-3 alert alert-success">
+            <strong>City submitted:</strong> @Model.SubmittedCityName
+        </div>
+    }
+</div>
