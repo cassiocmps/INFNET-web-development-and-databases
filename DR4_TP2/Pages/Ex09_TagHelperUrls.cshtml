@@ -1,0 +1,25 @@
+@page
+@model Ex09_TagHelperUrlsModel
+@{
+    ViewData["Title"] = "Exercise 09 - Tag Helper URLs";
+}
+
+<div class="exercise-container">
+    <h1>Exercise 09: Tag Helper URLs</h1>
+    
+    <div class="row">
+        @foreach (var city in Model.Cities)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@city</h5>
+                        <a asp-page="/Ex08_RouteParameters" asp-route-cityName="@city" class="btn btn-primary">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
