@@ -1,0 +1,20 @@
+@page "{cityName?}"
+@model Ex08_RouteParametersModel
+@{
+    ViewData["Title"] = "Exercise 08 - Route Parameters";
+}
+
+<div class="exercise-container">
+    <h1>Exercise 08: Route Parameters</h1>
+    
+    @if (!string.IsNullOrEmpty(Model.CityName))
+    {
+        <div class="alert alert-info">
+            <strong>City:</strong> @Model.CityName
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No city name provided in URL.</div>
+    }
+</div>
