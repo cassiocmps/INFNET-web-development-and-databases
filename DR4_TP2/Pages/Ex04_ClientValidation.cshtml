@@ -1,0 +1,29 @@
+@page
+@model Ex04_ClientValidationModel
+@{
+    ViewData["Title"] = "Ex04: Client-side Validation with Tag Helpers";
+}
+
+<div class="exercise-container">
+    <h1>Ex04: Client-side Validation with Tag Helpers</h1>
+    
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.CityName" class="form-label">City Name:</label>
+            <input asp-for="Input.CityName" class="form-control" />
+            <span asp-validation-for="Input.CityName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    @if (Model.IsSubmitted && ModelState.IsValid)
+    {
+        <div class="mt-3 alert alert-success">
+            <strong>Valid city submitted:</strong> @Model.Input.CityName
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
