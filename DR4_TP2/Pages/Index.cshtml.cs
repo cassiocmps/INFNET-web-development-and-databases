@@ -12,9 +12,6 @@ namespace DR4_TP2.Pages
             _logger = logger;
         }
 
-        public void OnGet()
-        {
-
-        }
+        public void OnGet() { }
     }
 }
