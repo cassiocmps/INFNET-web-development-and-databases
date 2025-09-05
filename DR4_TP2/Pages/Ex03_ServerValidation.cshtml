@@ -1,0 +1,25 @@
+@page
+@model Ex03_ServerValidationModel
+@{
+    ViewData["Title"] = "Ex03: Server-side Validation with Data Annotations";
+}
+
+<div class="exercise-container">
+    <h1>Ex03: Server-side Validation with Data Annotations</h1>
+    
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.CityName" class="form-label">City Name:</label>
+            <input asp-for="Input.CityName" class="form-control" />
+            <span asp-validation-for="Input.CityName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    @if (Model.IsSubmitted && ModelState.IsValid)
+    {
+        <div class="mt-3 alert alert-success">
+            <strong>Valid city submitted:</strong> @Model.Input.CityName
+        </div>
+    }
+</div>
