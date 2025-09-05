@@ -1,0 +1,55 @@
+@page
+@model Ex12_CustomValidationModel
+@{
+    ViewData["Title"] = "Exercise 12 - Custom Validation";
+}
+
+<div class="exercise-container">
+    <h1>Exercise 12: Custom Validation</h1>
+    
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.CountryName" class="form-label">Country Name:</label>
+            <input asp-for="Input.CountryName" class="form-control" />
+            <span asp-validation-for="Input.CountryName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.CountryCode" class="form-label">Country Code (2 letters):</label>
+            <input asp-for="Input.CountryCode" class="form-control" maxlength="2" style="text-transform: uppercase;" />
+            <span asp-validation-for="Input.CountryCode" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    <div class="mt-3 alert alert-warning">
+        <small><strong>Rule:</strong> Country name and code must start with the same letter (e.g., Brazil + BR)</small>
+    </div>
+
+    @if (Model.CreatedCountry != null)
+    {
+        <div class="mt-3 alert alert-success">
+            <strong>Valid country:</strong> @Model.CreatedCountry.CountryName (@Model.CreatedCountry.CountryCode)
+        </div>
+    }
+
+    @if (Model.IsSubmitted && !ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @if (ViewData.ModelState.ContainsKey("CustomValidation"))
+            {
+                @ViewData.ModelState["CustomValidation"]?.Errors.FirstOrDefault()?.ErrorMessage
+            }
+            else
+            {
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
