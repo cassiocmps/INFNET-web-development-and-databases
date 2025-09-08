@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace CityBreaks.Web.Models
 {
@@ -13,5 +14,7 @@ namespace CityBreaks.Web.Models
         [Required]
         [StringLength(2, MinimumLength = 2)]
         public string CountryCode { get; set; } = string.Empty;
+
+        public List<City> Cities { get; set; } = new();
     }
 }
