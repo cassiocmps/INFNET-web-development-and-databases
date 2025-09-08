@@ -1,12 +1,7 @@
-﻿@model List<CityBreaks.Web.Models.City>
+@model List<CityBreaks.Web.Models.City>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Cities";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 
 <h2>Cities</h2>
 @if (Model != null && Model.Count > 0)

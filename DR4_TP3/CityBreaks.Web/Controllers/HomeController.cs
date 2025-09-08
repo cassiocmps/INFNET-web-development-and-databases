@@ -9,13 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CityBreaks.Web.Controllers
 {
-    public class HomeController : Controller
+    public class CityController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<CityController> _logger;
         private readonly ICityService _cityService;
         private readonly CityBreaksContext _context;
 
-        public HomeController(ILogger<HomeController> logger, ICityService cityService, CityBreaksContext context)
+        public CityController(ILogger<CityController> logger, ICityService cityService, CityBreaksContext context)
         {
             _logger = logger;
             _cityService = cityService;
@@ -67,17 +67,6 @@ namespace CityBreaks.Web.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
