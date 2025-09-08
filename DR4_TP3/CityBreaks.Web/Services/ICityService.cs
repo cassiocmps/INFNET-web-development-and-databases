@@ -13,5 +13,6 @@ namespace CityBreaks.Web.Services
         Task<Property?> GetPropertyByIdAsync(int id);
         Task<bool> CreatePropertyAsync(CreatePropertyViewModel model);
         Task<bool> UpdatePropertyAsync(int id, EditPropertyViewModel model);
+        Task<bool> DeleteAsync(int id);
     }
 }

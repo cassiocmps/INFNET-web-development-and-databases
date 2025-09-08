@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,7 @@ namespace CityBreaks.Web.Models
         [ForeignKey("City")]
         public int CityId { get; set; }
         public City City { get; set; } = null!;
+
+        public DateTime? DeletedAt { get; set; }
     }
 }

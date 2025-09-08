@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using CityBreaks.Web.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace CityBreaks.Web.Controllers
 {
@@ -75,6 +76,20 @@ namespace CityBreaks.Web.Controllers
             var success = await _cityService.UpdatePropertyAsync(id, model);
             if (!success)
                 return NotFound();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteProperty()
+        {
+            var cities = await _cityService.GetAllAsync();
+            ViewBag.Cities = cities;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProperty(int id)
+        {
+            await _cityService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
     }

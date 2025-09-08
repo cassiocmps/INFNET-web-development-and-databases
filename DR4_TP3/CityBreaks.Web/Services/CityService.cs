@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace CityBreaks.Web.Services
 {
@@ -19,7 +20,7 @@ namespace CityBreaks.Web.Services
         {
             return await _context.Cities
                 .Include(c => c.Country)
-                .Include(c => c.Properties)
+                .Include(c => c.Properties.Where(p => p.DeletedAt == null))
                 .ToListAsync();
         }
 
@@ -27,7 +28,7 @@ namespace CityBreaks.Web.Services
         {
             return await _context.Cities
                 .Include(c => c.Country)
-                .Include(c => c.Properties)
+                .Include(c => c.Properties.Where(p => p.DeletedAt == null))
                 .FirstOrDefaultAsync(c => EF.Functions.Collate(c.Name, "NOCASE") == name);
         }
 
@@ -61,6 +62,15 @@ namespace CityBreaks.Web.Services
             if (property == null) return false;
             property.Name = model.Name;
             property.PricePerNight = model.PricePerNight;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var property = await _context.Properties.FindAsync(id);
+            if (property == null) return false;
+            property.DeletedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();
             return true;
         }

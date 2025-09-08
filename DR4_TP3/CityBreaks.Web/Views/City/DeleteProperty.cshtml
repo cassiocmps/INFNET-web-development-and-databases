@@ -1,0 +1,22 @@
+@model int?
+@{
+    ViewData["Title"] = "Delete Property";
+}
+
+<h1>Delete Property</h1>
+
+<form asp-action="DeleteProperty" method="post">
+    <div class="mb-3">
+        <label for="propertyId" class="form-label">Select Property to Delete</label>
+        <select id="propertyId" name="id" class="form-select">
+            @foreach (var city in ViewBag.Cities as List<CityBreaks.Web.Models.City>)
+            {
+                foreach (var property in city.Properties)
+                {
+                    <option value="@property.Id">@property.Name (@city.Name)</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>

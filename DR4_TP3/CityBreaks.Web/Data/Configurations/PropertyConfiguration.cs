@@ -15,6 +15,8 @@ namespace CityBreaks.Web.Data.Configurations
                 .HasColumnName("PricePerNight");
             builder.Property(p => p.CityId)
                 .HasColumnName("CityId");
+            builder.Property(p => p.DeletedAt)
+                .HasColumnName("DeletedAt");
 
             builder.HasData(
                 new Property { Id = 1, Name = "Eiffel Tower View Apartment", PricePerNight = 150, CityId = 1 },
