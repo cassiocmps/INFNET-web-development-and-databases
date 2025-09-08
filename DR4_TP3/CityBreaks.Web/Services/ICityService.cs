@@ -14,5 +14,6 @@ namespace CityBreaks.Web.Services
         Task<bool> CreatePropertyAsync(CreatePropertyViewModel model);
         Task<bool> UpdatePropertyAsync(int id, EditPropertyViewModel model);
         Task<bool> DeleteAsync(int id);
+        Task<List<Property>> GetFilteredAsync(decimal? minPrice, decimal? maxPrice, string cityName, string propertyName);
     }
 }

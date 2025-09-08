@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Linq;
 
 namespace CityBreaks.Web.Services
 {
@@ -73,6 +74,25 @@ namespace CityBreaks.Web.Services
             property.DeletedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<List<Property>> GetFilteredAsync(decimal? minPrice, decimal? maxPrice, string cityName, string propertyName)
+        {
+            var query = _context.Properties
+                .Include(p => p.City)
+                .Where(p => p.DeletedAt == null)
+                .AsQueryable();
+
+            if (minPrice.HasValue)
+                query = query.Where(p => p.PricePerNight >= minPrice.Value);
+            if (maxPrice.HasValue)
+                query = query.Where(p => p.PricePerNight <= maxPrice.Value);
+            if (!string.IsNullOrWhiteSpace(cityName))
+                query = query.Where(p => EF.Functions.Collate(p.City.Name, "NOCASE").Contains(cityName));
+            if (!string.IsNullOrWhiteSpace(propertyName))
+                query = query.Where(p => EF.Functions.Collate(p.Name, "NOCASE").Contains(propertyName));
+
+            return await query.ToListAsync();
         }
     }
 }

@@ -92,5 +92,15 @@ namespace CityBreaks.Web.Controllers
             await _cityService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> FilterProperties(decimal? minPrice, decimal? maxPrice, string cityName, string propertyName)
+        {
+            var properties = await _cityService.GetFilteredAsync(minPrice, maxPrice, cityName, propertyName);
+            ViewBag.MinPrice = minPrice;
+            ViewBag.MaxPrice = maxPrice;
+            ViewBag.CityName = cityName;
+            ViewBag.PropertyName = propertyName;
+            return View(properties);
+        }
     }
 }
