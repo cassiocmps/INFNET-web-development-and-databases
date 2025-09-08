@@ -1,20 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
 namespace CityBreaks.Web.Models
 {
-    public class City
+    public class Property
     {
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; } = string.Empty;
 
-        [ForeignKey("Country")]
-        public int CountryId { get; set; }
-        public Country Country { get; set; } = null!;
+        [Required]
+        [Range(0, double.MaxValue)]
+        public decimal PricePerNight { get; set; }
 
-        public List<Property> Properties { get; set; } = new();
+        [ForeignKey("City")]
+        public int CityId { get; set; }
+        public City City { get; set; } = null!;
     }
 }
