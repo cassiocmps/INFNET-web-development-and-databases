@@ -1,5 +1,6 @@
 using CityBreaks.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using CityBreaks.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<CityBreaksContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("CityBreaks")));
+builder.Services.AddScoped<ICityService, CityService>();
 
 var app = builder.Build();
 
@@ -21,5 +23,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
-app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
