@@ -23,6 +23,14 @@ namespace CityBreaks.Web.Controllers
             return View(cities);
         }
 
+        public async Task<IActionResult> CityDetails(string name)
+        {
+            var city = await _cityService.GetByNameAsync(name);
+            if (city == null)
+                return NotFound();
+            return View(city);
+        }
+
         public IActionResult Privacy()
         {
             return View();

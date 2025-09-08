@@ -1,0 +1,22 @@
+@model CityBreaks.Web.Models.City
+@{
+    ViewData["Title"] = $"Details for {Model.Name}";
+}
+
+<h1>@Model.Name</h1>
+<p><strong>Country:</strong> @Model.Country.CountryName</p>
+
+<h2>Properties</h2>
+@if (Model.Properties != null && Model.Properties.Count > 0)
+{
+    <ul>
+        @foreach (var property in Model.Properties)
+        {
+            <li>@property.Name - $@property.PricePerNight/night</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No properties found for this city.</p>
+}

@@ -16,6 +16,7 @@
         {
             <li>
                 <strong>@city.Name</strong> - @city.Country.CountryName
+                <a asp-action="CityDetails" asp-route-name="@city.Name" class="btn btn-link">Details</a>
                 <ul>
                     @foreach (var property in city.Properties)
                     {
