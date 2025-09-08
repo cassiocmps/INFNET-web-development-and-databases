@@ -1,0 +1,29 @@
+@model CityBreaks.Web.Models.CreatePropertyViewModel
+@{
+    ViewData["Title"] = "Create Property";
+}
+
+<h1>Create Property</h1>
+
+<form asp-action="CreateProperty" method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PricePerNight" class="form-label"></label>
+        <input asp-for="PricePerNight" class="form-control" />
+        <span asp-validation-for="PricePerNight" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CityId" class="form-label">City</label>
+        <select asp-for="CityId" asp-items="Model.Cities" class="form-select"></select>
+        <span asp-validation-for="CityId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
