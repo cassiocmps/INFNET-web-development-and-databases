@@ -13,6 +13,11 @@ namespace CityBreaks.Web.Data.Configurations
                 .HasColumnName("Name");
             builder.Property(c => c.CountryId)
                 .HasColumnName("CountryId");
+
+            builder.HasData(
+                new City { Id = 1, Name = "Paris", CountryId = 1 },
+                new City { Id = 2, Name = "Rome", CountryId = 2 }
+            );
         }
     }
 }

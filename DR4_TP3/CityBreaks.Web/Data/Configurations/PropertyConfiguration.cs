@@ -15,6 +15,11 @@ namespace CityBreaks.Web.Data.Configurations
                 .HasColumnName("PricePerNight");
             builder.Property(p => p.CityId)
                 .HasColumnName("CityId");
+
+            builder.HasData(
+                new Property { Id = 1, Name = "Eiffel Tower View Apartment", PricePerNight = 150, CityId = 1 },
+                new Property { Id = 2, Name = "Colosseum Studio", PricePerNight = 120, CityId = 2 }
+            );
         }
     }
 }
