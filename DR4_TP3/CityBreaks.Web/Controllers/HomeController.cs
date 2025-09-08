@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using CityBreaks.Web.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CityBreaks.Web.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace CityBreaks.Web.Controllers
 {
@@ -13,13 +11,11 @@ namespace CityBreaks.Web.Controllers
     {
         private readonly ILogger<CityController> _logger;
         private readonly ICityService _cityService;
-        private readonly CityBreaksContext _context;
 
-        public CityController(ILogger<CityController> logger, ICityService cityService, CityBreaksContext context)
+        public CityController(ILogger<CityController> logger, ICityService cityService)
         {
             _logger = logger;
             _cityService = cityService;
-            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -38,10 +34,9 @@ namespace CityBreaks.Web.Controllers
 
         public async Task<IActionResult> CreateProperty()
         {
-            var cities = await _cityService.GetAllAsync();
             var viewModel = new CreatePropertyViewModel
             {
-                Cities = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList()
+                Cities = await _cityService.GetCitySelectListAsync()
             };
             return View(viewModel);
         }
@@ -51,21 +46,35 @@ namespace CityBreaks.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var cities = await _cityService.GetAllAsync();
-                model.Cities = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
+                model.Cities = await _cityService.GetCitySelectListAsync();
                 return View(model);
             }
+            await _cityService.CreatePropertyAsync(model);
+            return RedirectToAction("Index");
+        }
 
-            var property = new Property
+        public async Task<IActionResult> EditProperty(int id)
+        {
+            var property = await _cityService.GetPropertyByIdAsync(id);
+            if (property == null)
+                return NotFound();
+            var viewModel = new EditPropertyViewModel
             {
-                Name = model.Name,
-                PricePerNight = model.PricePerNight,
-                CityId = model.CityId
+                Id = property.Id,
+                Name = property.Name,
+                PricePerNight = property.PricePerNight
             };
+            return View(viewModel);
+        }
 
-            await _context.Properties.AddAsync(property);
-            await _context.SaveChangesAsync();
-
+        [HttpPost]
+        public async Task<IActionResult> EditProperty(int id, EditPropertyViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            var success = await _cityService.UpdatePropertyAsync(id, model);
+            if (!success)
+                return NotFound();
             return RedirectToAction("Index");
         }
     }

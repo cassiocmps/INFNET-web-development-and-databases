@@ -1,6 +1,7 @@
 using CityBreaks.Web.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CityBreaks.Web.Services
 {
@@ -8,5 +9,9 @@ namespace CityBreaks.Web.Services
     {
         Task<List<City>> GetAllAsync();
         Task<City?> GetByNameAsync(string name);
+        Task<List<SelectListItem>> GetCitySelectListAsync();
+        Task<Property?> GetPropertyByIdAsync(int id);
+        Task<bool> CreatePropertyAsync(CreatePropertyViewModel model);
+        Task<bool> UpdatePropertyAsync(int id, EditPropertyViewModel model);
     }
 }
